@@ -48,21 +48,21 @@ public class RegisterFrame extends JFrame implements ActionListener {
         password2.setBounds(95, 270, 300, 40);
         password2.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        register = new JButton("Sign up");
-        register.setBounds(195, 330, 100, 40);
+        register = new JButton("Create an account");
+        register.setBounds(175, 330, 150, 40);
         register.setFocusable(false);
         register.setBackground(new Color(0x62DC3F));
         register.setBorder(BorderFactory.createLineBorder(new Color(0x45982B), 2));
         register.setOpaque(true);
-        register.setFont(new Font("Roboto", Font.PLAIN, 18));
+        register.setFont(new Font("Roboto", Font.PLAIN, 15));
         register.addActionListener(this);
 
         loginText = new JLabel("Already has an account?");
         loginText.setBounds(140, 380, 140, 20);
         loginText.setFont(new Font("Roboto", Font.PLAIN, 12));
 
-        loginHere = new JButton("<html><u>Login here</u?</html>");
-        loginHere.setBounds(250, 380, 100, 20);
+        loginHere = new JButton("<html><u>Sign in here</u?</html>");
+        loginHere.setBounds(255, 380, 100, 20);
         loginHere.setContentAreaFilled(false);
         loginHere.setOpaque(false);
         loginHere.setFocusable(false);

@@ -34,7 +34,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         password.setBounds(100, 120, 300, 40);
         password.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        accept = new JButton("Sign in");
+        accept = new JButton("Login");
         accept.setBounds(200, 185, 100, 40);
         accept.setFocusable(false);
         accept.setBackground(new Color(0x62DC3F));
@@ -47,7 +47,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         registerText.setBounds(130, 230, 170, 20);
         registerText.setFont(new Font("Roboto", Font.PLAIN, 12));
 
-        registerHere = new JButton("<html><u>Register here.</u></html>");
+        registerHere = new JButton("<html><u>Sign up here</u></html>");
         registerHere.setBounds(275, 230, 100, 20);
         registerHere.setContentAreaFilled(false);
         registerHere.setOpaque(false);
