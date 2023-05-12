@@ -11,8 +11,10 @@ public class FinalFrame extends JFrame {
         this.setTitle("Main Frame");
 
         text = new JLabel("Welcome " + username + "!");
-        text.setBounds(200, 160, 400, 100);
-        text.setFont(new Font("MV Boli", Font.PLAIN, 40));
+        text.setBounds(160, 160, 400, 100);
+        text.setFont(new Font("MV Boli", Font.PLAIN, 25));
+        text.setVerticalAlignment(SwingConstants.CENTER);
+        text.setHorizontalAlignment(SwingConstants.CENTER);
 
         this.add(text);
         this.setVisible(true);

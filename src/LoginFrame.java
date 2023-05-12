@@ -20,7 +20,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         this.setResizable(false);
         this.setTitle("Login");
 
-        loginText = new JLabel("Login:");
+        loginText = new JLabel("Login or email:");
         loginText.setBounds(100, 20, 200, 20);
 
         passwordText = new JLabel("Password:");
@@ -111,13 +111,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         }
     }
     public boolean checkLogin(String login) {
-        String filename = "Credentials.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        lineIterated = 0;
+        try (BufferedReader br = new BufferedReader(new FileReader("Credentials.txt"))) {
             String line;
             while((line = br.readLine()) != null) {
                 lineIterated++;
                 String[] words = line.split(":");
-                if(Objects.equals(words[1], login)) {
+                if(Objects.equals(words[1], login) || Objects.equals(words[0], login)) {
                     return true;
                 }
             }
@@ -127,14 +127,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         return false;
     }
     public boolean checkPassword(String password) {
-        String filename = "Credentials.txt";
-        try (BufferedReader br = new BufferedReader(new FileReader(filename))) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Credentials.txt"))) {
             String line;
             int currentLine = 1;
             while((line = br.readLine()) != null) {
                 if (currentLine == lineIterated) {
                     String[] words = line.split(":");
-                    if(Objects.equals(words[2], password)) {
+                    if(Objects.equals(words[2].trim(), password)) {
                         return true;
                     }
                     break;
