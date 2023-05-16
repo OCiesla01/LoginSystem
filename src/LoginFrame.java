@@ -9,7 +9,8 @@ import java.util.Objects;
 
 public class LoginFrame extends JFrame implements ActionListener {
     JLabel loginText, passwordText, registerText, loginSuccessful;
-    JTextField login, password;
+    JTextField login;
+    JPasswordField password;
     JButton accept, registerHere;
     JProgressBar redirect;
     int lineIterated = 0;
@@ -30,7 +31,7 @@ public class LoginFrame extends JFrame implements ActionListener {
         login.setBounds(100, 40, 300, 40);
         login.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        password = new JTextField();
+        password = new JPasswordField();
         password.setBounds(100, 120, 300, 40);
         password.setFont(new Font("Roboto", Font.PLAIN, 25));
 
@@ -86,13 +87,14 @@ public class LoginFrame extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == accept) {
             if(checkLogin(login.getText())) {
-                if(checkPassword(password.getText())) {
+                char[] passwordCharArr = password.getPassword();
+                String password = new String(passwordCharArr);
+                if(checkPassword(password)) {
                     this.dispose();
                     new FinalFrame(login.getText());
                 } else {
                     JOptionPane.showMessageDialog(null, "Password is incorrect.",
                             "Password error", JOptionPane.ERROR_MESSAGE);
-                    password.setText("");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Username does not exist.",

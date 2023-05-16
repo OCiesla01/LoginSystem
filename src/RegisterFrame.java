@@ -10,7 +10,8 @@ import java.util.Objects;
 
 public class RegisterFrame extends JFrame implements ActionListener {
     JLabel emailText, usernameText, password1Text, password2Text, loginText, registerSuccessful;
-    JTextField email, username, password1, password2;
+    JTextField email, username;
+    JPasswordField password1, password2;
     JButton register, loginHere;
     FileWriter writer = new FileWriter("Credentials.txt", true);
     RegisterFrame() throws IOException {
@@ -40,11 +41,11 @@ public class RegisterFrame extends JFrame implements ActionListener {
         username.setBounds(95, 110, 300, 40);
         username.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        password1 = new JTextField();
+        password1 = new JPasswordField();
         password1.setBounds(95, 190, 300, 40);
         password1.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        password2 = new JTextField();
+        password2 = new JPasswordField();
         password2.setBounds(95, 270, 300, 40);
         password2.setFont(new Font("Roboto", Font.PLAIN, 25));
 
@@ -97,10 +98,14 @@ public class RegisterFrame extends JFrame implements ActionListener {
             if(email.getText().indexOf('@') != -1) {
                 if(checkIfEmailInCredentials(email.getText())) {
                   if(checkIfUsernameInCredentials(username.getText())) {
-                        if(password1.getText().length() >= 6) {
-                            if(Objects.equals(password1.getText(), password2.getText())) {
+                      char[] password1CharArr = password1.getPassword();
+                      String password1 = new String(password1CharArr);
+                      char[] password2CharArr = password2.getPassword();
+                      String password2 = new String(password2CharArr);
+                        if(password1.length() >= 6) {
+                            if(Objects.equals(password1, password2)) {
                                 try {
-                                    writer.write(email.getText() + ":" + username.getText() + ":" + password1.getText() + "\n");
+                                    writer.write(email.getText() + ":" + username.getText() + ":" + password2 + "\n");
                                     writer.close();
                                 } catch (IOException ex) {
                                     throw new RuntimeException(ex);
@@ -110,17 +115,11 @@ public class RegisterFrame extends JFrame implements ActionListener {
                             } else {
                                 JOptionPane.showMessageDialog(null, "Passwords don't match.",
                                         "Password error", JOptionPane.ERROR_MESSAGE);
-                                password1.setText("");
-                                password2.setText("");
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long.",
                                     "Username error", JOptionPane.ERROR_MESSAGE);
-                            System.out.println(password1.getText());
-                            System.out.println(password1.getText().length());
                             username.setText("");
-                            password1.setText("");
-                            password2.setText("");
                     }
                   } else {
                       JOptionPane.showMessageDialog(null, "Username already exists.",
