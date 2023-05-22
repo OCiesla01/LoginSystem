@@ -9,8 +9,8 @@ import java.util.Objects;
 
 public class LoginFrame extends JFrame implements ActionListener {
     JLabel loginText, passwordText, registerText, loginSuccessful;
-    JTextField login;
-    JPasswordField password;
+    JTextField loginField;
+    JPasswordField passwordField;
     JButton accept, registerHere;
     JProgressBar redirect;
     int lineIterated = 0;
@@ -27,13 +27,13 @@ public class LoginFrame extends JFrame implements ActionListener {
         passwordText = new JLabel("Password:");
         passwordText.setBounds(100, 100, 200, 20);
 
-        login = new JTextField();
-        login.setBounds(100, 40, 300, 40);
-        login.setFont(new Font("Roboto", Font.PLAIN, 25));
+        loginField = new JTextField();
+        loginField.setBounds(100, 40, 300, 40);
+        loginField.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        password = new JPasswordField();
-        password.setBounds(100, 120, 300, 40);
-        password.setFont(new Font("Roboto", Font.PLAIN, 25));
+        passwordField = new JPasswordField();
+        passwordField.setBounds(100, 120, 300, 40);
+        passwordField.setFont(new Font("Roboto", Font.PLAIN, 25));
 
         accept = new JButton("Login");
         accept.setBounds(200, 185, 100, 40);
@@ -78,29 +78,30 @@ public class LoginFrame extends JFrame implements ActionListener {
         this.add(registerHere);
         this.add(loginText);
         this.add(passwordText);
-        this.add(login);
-        this.add(password);
+        this.add(loginField);
+        this.add(passwordField);
         this.add(accept);
         this.setVisible(true);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource() == accept) {
-            if(checkLogin(login.getText())) {
-                char[] passwordCharArr = password.getPassword();
+            if(checkLogin(loginField.getText())) {
+                char[] passwordCharArr = passwordField.getPassword();
                 String password = new String(passwordCharArr);
                 if(checkPassword(password)) {
                     this.dispose();
-                    new FinalFrame(login.getText());
+                    new FinalFrame(loginField.getText());
                 } else {
                     JOptionPane.showMessageDialog(null, "Password is incorrect.",
                             "Password error", JOptionPane.ERROR_MESSAGE);
+                    passwordField.setText("");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Username does not exist.",
                         "Username error", JOptionPane.ERROR_MESSAGE);
-                login.setText("");
-                password.setText("");
+                loginField.setText("");
+                passwordField.setText("");
             }
         }
         if(e.getSource() == registerHere) {

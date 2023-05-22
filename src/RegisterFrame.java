@@ -11,7 +11,7 @@ import java.util.Objects;
 public class RegisterFrame extends JFrame implements ActionListener {
     JLabel emailText, usernameText, password1Text, password2Text, loginText, registerSuccessful;
     JTextField email, username;
-    JPasswordField password1, password2;
+    JPasswordField password1Field, password2Field;
     JButton register, loginHere;
     FileWriter writer = new FileWriter("Credentials.txt", true);
     RegisterFrame() throws IOException {
@@ -41,13 +41,13 @@ public class RegisterFrame extends JFrame implements ActionListener {
         username.setBounds(95, 110, 300, 40);
         username.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        password1 = new JPasswordField();
-        password1.setBounds(95, 190, 300, 40);
-        password1.setFont(new Font("Roboto", Font.PLAIN, 25));
+        password1Field = new JPasswordField();
+        password1Field.setBounds(95, 190, 300, 40);
+        password1Field.setFont(new Font("Roboto", Font.PLAIN, 25));
 
-        password2 = new JPasswordField();
-        password2.setBounds(95, 270, 300, 40);
-        password2.setFont(new Font("Roboto", Font.PLAIN, 25));
+        password2Field = new JPasswordField();
+        password2Field.setBounds(95, 270, 300, 40);
+        password2Field.setFont(new Font("Roboto", Font.PLAIN, 25));
 
         register = new JButton("Create an account");
         register.setBounds(175, 330, 150, 40);
@@ -88,8 +88,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
         this.add(password2Text);
         this.add(email);
         this.add(username);
-        this.add(password1);
-        this.add(password2);
+        this.add(password1Field);
+        this.add(password2Field);
         this.setVisible(true);
     }
     @Override
@@ -98,9 +98,9 @@ public class RegisterFrame extends JFrame implements ActionListener {
             if(email.getText().indexOf('@') != -1) {
                 if(checkIfEmailInCredentials(email.getText())) {
                   if(checkIfUsernameInCredentials(username.getText())) {
-                      char[] password1CharArr = password1.getPassword();
+                      char[] password1CharArr = password1Field.getPassword();
                       String password1 = new String(password1CharArr);
-                      char[] password2CharArr = password2.getPassword();
+                      char[] password2CharArr = password2Field.getPassword();
                       String password2 = new String(password2CharArr);
                         if(password1.length() >= 6) {
                             if(Objects.equals(password1, password2)) {
@@ -115,6 +115,8 @@ public class RegisterFrame extends JFrame implements ActionListener {
                             } else {
                                 JOptionPane.showMessageDialog(null, "Passwords don't match.",
                                         "Password error", JOptionPane.ERROR_MESSAGE);
+                                password1Field.setText("");
+                                password2Field.setText("");
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Password must be at least 6 characters long.",
@@ -125,22 +127,22 @@ public class RegisterFrame extends JFrame implements ActionListener {
                       JOptionPane.showMessageDialog(null, "Username already exists.",
                               "Username error", JOptionPane.ERROR_MESSAGE);
                       username.setText("");
-                      password1.setText("");
-                      password2.setText("");
+                      password1Field.setText("");
+                      password2Field.setText("");
                   }
                 } else {
                     JOptionPane.showMessageDialog(null, "Email is already registered.",
                             "Email error", JOptionPane.ERROR_MESSAGE);
                     email.setText("");
-                    password1.setText("");
-                    password2.setText("");
+                    password1Field.setText("");
+                    password2Field.setText("");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Wrong email.",
                         "Email error", JOptionPane.ERROR_MESSAGE);
                 email.setText("");
-                password1.setText("");
-                password2.setText("");
+                password1Field.setText("");
+                password2Field.setText("");
             }
         }
         if (e.getSource() == loginHere) {
